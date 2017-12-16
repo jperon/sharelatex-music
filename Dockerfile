@@ -2,17 +2,16 @@ FROM sharelatex/sharelatex
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update ; \
+RUN add-apt-repository ppa:gregorio-project/gregorio ; apt-get update ; \
     apt-get -y --force-yes install --no-install-recommends \
-        fonts-linuxlibertine lmodern
+        fonts-linuxlibertine lmodern gregorio
 
-RUN tlmgr option repository http://ctan.mines-albi.fr/systems/texlive/tlnet/ ; \
-    tlmgr update --self ; \
+RUN tlmgr update --self ; \
     tlmgr install collection-music collection-humanities \
         collection-latexrecommended collection-luatex \
-        collection-fontsrecommended collection-langfrench \
-        collection-langeuropean libertine xkeyval keycommand \
-        environ trimspaces currfile ; \
+        collection-fontsrecommended libertine \
+        collection-langfrench collection-langeuropean \
+        xkeyval keycommand xstring environ trimspaces currfile ; \
     ln -s \
         /usr/local/texlive/2017/texmf-dist/scripts/lyluatex/lyluatex.lua \
         /usr/local/texlive/2017/texmf-dist/tex/latex/lyluatex/ ; \
