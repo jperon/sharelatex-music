@@ -15,7 +15,7 @@ RUN cd /usr/local/texlive/ && \
         collection-latexrecommended collection-luatex \
         collection-fontsrecommended libertine \
         collection-langfrench collection-langeuropean \
-        xkeyval keycommand xstring environ trimspaces currfile && \
+        xkeyval keycommand xstring environ minibox trimspaces currfile && \
     mktexlsr
 
 RUN wget \
