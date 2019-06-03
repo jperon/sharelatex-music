@@ -6,12 +6,13 @@ RUN add-apt-repository ppa:gregorio-project/gregorio ; apt-get update ; \
     apt-get -y --force-yes install --no-install-recommends \
         fonts-linuxlibertine lmodern gregorio
 
-RUN cd /usr/local/texlive/ && \
-    mv 2017 2019 && ln -s 2019 2017 && cd 2019 && \
-    wget http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh && \
-    sh update-tlmgr-latest.sh -- --upgrade && \
+RUN cd /usr/local/texlive/2* && \
+    wget http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh ; \
+    sh update-tlmgr-latest.sh -- --upgrade ; \
     tlmgr update --self --all && \
-    tlmgr install collection-music collection-humanities \
+    rm -r /usr/local/texlive/2*/tlpkg/backups/
+
+RUN tlmgr install collection-music collection-humanities \
         collection-latexrecommended collection-luatex \
         collection-fontsrecommended libertine \
         collection-langfrench collection-langeuropean \
